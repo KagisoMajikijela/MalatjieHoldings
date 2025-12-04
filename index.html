@@ -32,15 +32,22 @@
     <section class="hero">
         <!-- Video Background -->
         <div class="video-container">
-            <video autoplay muted loop playsinline id="heroVideo">
-                <!-- Your local video file -->
-                <source src="assets/herominingBackground.mp4" type="video/mp4">
-                <!-- Optional: Add webm and ogg versions for better browser compatibility -->
-                <!-- <source src="assets/herominingBackground.webm" type="video/webm">
-                <source src="assets/herominingBackground.ogv" type="video/ogg"> -->
-                <!-- Fallback image if video doesn't load -->
-                <img src="https://images.pexels.com/photos/2800102/pexels-photo-2800102.jpeg" alt="Mining operations background">
-            </video>
+           <!-- YouTube Video Background -->
+<div class="video-container">
+    <!-- YouTube iframe for background video -->
+    <iframe 
+    id="heroVideo"
+    src="https://www.youtube.com/embed/pFjikuVUNLo?autoplay=1&mute=1&loop=1&playlist=pFjikuVUNLo&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&background=1"
+    frameborder="0"
+    allow="autoplay; encrypted-media; picture-in-picture"
+    allowfullscreen
+    style="position: absolute; top: 50%; left: 50%; width: 100vw; height: 100vh; transform: translate(-50%, -50%); pointer-events: none;"
+    loading="lazy"
+></iframe>
+    
+    <!-- Video overlay for better text readability -->
+    <div class="video-overlay"></div>
+</div>
             <!-- Video overlay for better text readability -->
             <div class="video-overlay"></div>
         </div>
