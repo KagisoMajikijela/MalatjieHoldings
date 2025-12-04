@@ -1,5 +1,9 @@
 // DOM Ready
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('=== DEBUG: HAMBURGER CHECK ===');
+    console.log('Element with id="hamburger":', document.getElementById('hamburger'));
+    console.log('Element with id="navLinks":', document.getElementById('navLinks'));
+    
     // Update copyright year
     const year = new Date().getFullYear();
     document.querySelectorAll('[data-year]').forEach(el => {
@@ -18,24 +22,85 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Mobile menu toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
+    // ===== MOBILE HAMBURGER MENU =====
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
     
-    if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', () => {
+    if (hamburger && navLinks) {
+        console.log('Hamburger menu elements FOUND, setting up functionality...');
+        
+        // Create overlay for mobile menu
+        const overlay = document.createElement('div');
+        overlay.className = 'nav-overlay';
+        document.body.appendChild(overlay);
+        
+        // Toggle menu function
+        function toggleMenu() {
             navLinks.classList.toggle('active');
-            menuToggle.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            console.log('Menu toggled. Active:', navLinks.classList.contains('active'));
+        }
+        
+        // Hamburger click
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
         });
+        
+        // Overlay click (close menu)
+        overlay.addEventListener('click', toggleMenu);
+        
+        // Close menu when clicking links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+        
+        // Close menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+        
+        // Close menu on window resize (desktop)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+        
+        console.log('Hamburger menu functionality SETUP COMPLETE');
+    } else {
+        console.error('ERROR: Hamburger or navLinks not found! Check HTML IDs.');
+        console.log('Hamburger:', hamburger);
+        console.log('NavLinks:', navLinks);
     }
 
-    // Close mobile menu when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navLinks) navLinks.classList.remove('active');
-            if (menuToggle) menuToggle.classList.remove('active');
+    // ===== VIDEO TOGGLE FUNCTION (for YouTube iframe) =====
+    const videoToggle = document.getElementById('videoToggle');
+    if (videoToggle) {
+        videoToggle.addEventListener('click', function() {
+            const iframe = document.getElementById('heroVideo');
+            if (iframe) {
+                const currentSrc = iframe.src;
+                if (currentSrc.includes('mute=1')) {
+                    // Unmute
+                    iframe.src = currentSrc.replace('mute=1', 'mute=0');
+                    videoToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+                } else {
+                    // Mute
+                    iframe.src = currentSrc.replace('mute=0', 'mute=1');
+                    videoToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                }
+            }
         });
-    });
+    }
 
     // Contact form handling
     const contactForm = document.getElementById('contactForm');
@@ -176,55 +241,3 @@ function highlightCurrentPage() {
         }
     });
 }
-
-// Add CSS animations dynamically
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-    }
-    
-    @keyframes slideOut {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(100%); opacity: 0; }
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .btn-small {
-        padding: 0.5rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-    }
-    
-    .stats-grid, .subsidiaries-grid, .values-grid, .achievements-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        margin: 2rem 0;
-    }
-    
-    .service-content-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        align-items: center;
-        margin: 2rem 0;
-    }
-    
-    @media (max-width: 768px) {
-        .service-content-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-`;
-document.head.appendChild(style);

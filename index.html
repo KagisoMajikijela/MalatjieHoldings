@@ -14,10 +14,16 @@
     <header>
         <nav class="navbar">
             <div class="logo">TK MALATJI HOLDINGS</div>
-            <button class="menu-toggle" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
+            
+            <!-- Hamburger Button -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
             </button>
-            <ul class="nav-links">
+            
+            <!-- Navigation Links -->
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="services.html">Services</a></li>
@@ -27,27 +33,21 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-         <!-- Hero Section with Video Background -->
+    <!-- Hero Section with Video Background -->
     <section class="hero">
         <!-- Video Background -->
         <div class="video-container">
-           <!-- YouTube Video Background -->
-<div class="video-container">
-    <!-- YouTube iframe for background video -->
-    <iframe 
-    id="heroVideo"
-    src="https://www.youtube.com/embed/pFjikuVUNLo?autoplay=1&mute=1&loop=1&playlist=pFjikuVUNLo&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&background=1"
-    frameborder="0"
-    allow="autoplay; encrypted-media; picture-in-picture"
-    allowfullscreen
-    style="position: absolute; top: 50%; left: 50%; width: 100vw; height: 100vh; transform: translate(-50%, -50%); pointer-events: none;"
-    loading="lazy"
-></iframe>
-    
-    <!-- Video overlay for better text readability -->
-    <div class="video-overlay"></div>
-</div>
+            <!-- YouTube iframe for background video -->
+            <iframe 
+                id="heroVideo"
+                src="https://www.youtube.com/embed/pFjikuVUNLo?autoplay=1&mute=1&loop=1&playlist=pFjikuVUNLo&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&background=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+                style="position: absolute; top: 50%; left: 50%; width: 100vw; height: 100vh; transform: translate(-50%, -50%); pointer-events: none;"
+                loading="lazy"
+            ></iframe>
+            
             <!-- Video overlay for better text readability -->
             <div class="video-overlay"></div>
         </div>
@@ -198,7 +198,7 @@
                 </div>
                 <div class="info-item">
                     <i class="fas fa-phone"></i>
-                    <span>+27 79 772 4648‬</span>
+                    <span>+27 79 772 4648</span>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-envelope"></i>
@@ -212,6 +212,6 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+     <script src="/js/main.js"></script>
 </body>
 </html>

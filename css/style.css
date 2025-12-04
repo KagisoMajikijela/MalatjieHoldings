@@ -109,7 +109,7 @@ p {
     letter-spacing: 1px;
 }
 
-/* FIX 1: Cleaned up navbar list styling */
+/* FIXED: Navbar list styling */
 .nav-links {
     display: flex;
     gap: 2rem;
@@ -145,13 +145,41 @@ p {
     border-bottom: 3px solid var(--secondary);
 }
 
-.menu-toggle {
+/* REMOVED: .menu-toggle styles */
+
+/* ===== HAMBURGER MENU ===== */
+.hamburger {
     display: none;
-    background: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
     border: none;
-    color: white;
-    font-size: 1.5rem;
     cursor: pointer;
+    padding: 0;
+    z-index: 1000;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger Animation */
+.hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
 }
 
 /* ===== VIDEO BACKGROUND STYLES ===== */
@@ -165,7 +193,7 @@ p {
     z-index: 0;
 }
 
-.video-container video {
+.video-container iframe {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -238,7 +266,7 @@ p {
     margin: 0 1rem;
 }
 
-/* FIX 2: Hero text visibility */
+/* FIXED: Hero text visibility */
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 1.5rem;
@@ -328,7 +356,7 @@ p {
     padding: 2rem;
 }
 
-/* FIX 3: Page banner text visibility */
+/* FIXED: Page banner text visibility */
 .page-banner h1 {
     color: #ffffff;
     text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
@@ -609,7 +637,7 @@ p {
     margin: 3rem 0;
 }
 
-/* FIX 4: Mission & Vision text visibility */
+/* FIXED: Mission & Vision text visibility */
 .mission-card {
     background: var(--primary);
     color: white;
@@ -729,7 +757,7 @@ p {
     font-size: 1.1rem;
 }
 
-/* FIX 5: Service CTA text visibility */
+/* FIXED: Service CTA text visibility */
 .service-cta {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: white;
@@ -944,7 +972,7 @@ p {
     border-radius: 8px;
 }
 
-/* FIX 6: Project CTA text visibility */
+/* FIXED: Project CTA text visibility */
 .project-cta {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: white;
@@ -1329,24 +1357,26 @@ footer .social-links a:hover {
     }
 }
 
+/* FIXED: Mobile menu styles */
 @media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
+    .hamburger {
+        display: flex;
     }
     
     .nav-links {
         position: fixed;
-        top: 60px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 60px);
-        background: var(--dark);
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
         flex-direction: column;
+        justify-content: center;
         align-items: center;
-        justify-content: flex-start;
-        padding-top: 2rem;
-        transition: var(--transition);
+        transition: right 0.4s ease;
         z-index: 999;
+        padding-top: 80px;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.3);
         gap: 0;
     }
     
@@ -1365,7 +1395,23 @@ footer .social-links a:hover {
     }
     
     .nav-links.active {
+        right: 0;
+    }
+    
+    /* Overlay when menu is open */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
         left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 998;
+    }
+    
+    .nav-overlay.active {
+        display: block;
     }
     
     .hero {
@@ -1480,4 +1526,3 @@ footer .social-links a:hover {
 .notification.slideOut {
     animation: slideOut 0.3s ease;
 }
-
