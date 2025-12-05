@@ -79,6 +79,11 @@
     <p>Fill out the form below and our team will get back to you within 24 hours.</p>
     
     <form class="contact-form" name="contact" method="POST" netlify>
+        <!-- ADDED: Hidden fields for better email handling -->
+        <input type="hidden" name="_subject" value="Website Contact Form Submission">
+        <input type="hidden" name="_replyto" value="{{email}}">
+        <input type="hidden" name="_format" value="plain">
+        
         <div class="form-row">
             <div class="form-group half">
                 <label for="name">Full Name *</label>
